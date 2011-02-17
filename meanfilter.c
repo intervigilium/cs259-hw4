@@ -9,6 +9,7 @@
 #include <string.h>
 #include <math.h>
 #include <unistd.h>
+#include <time.h>
 
 #define DEFAULT_SIZE 256
 #define MAX_FILENAME_SIZE 1024
@@ -32,7 +33,7 @@ round(double d)
 void
 help()
 {
-    printf("usage: meanfilter -n <iterations> -i <input file>\n");
+    printf("usage: meanfilter [-n <iterations> -g|-i <input file>\]n");
     printf("input file format: single number of array, each on newline\n");
 }
 
@@ -73,6 +74,23 @@ cleanup_grid(struct Grid *grid)
     }
     free(grid->grid);
     free(grid);
+}
+
+
+void
+generate_grid(struct Grid *grid)
+{
+    int i, j, k;
+
+    srand(time(NULL));
+    for (i = 0; i < grid->x; i++) {
+        for (j = 0; j < grid->y; j++) {
+            for (k = 0; k < grid->z; k++) {
+                int n = rand() % 256;
+                grid->grid[i][j][k] = n;
+            }
+        }
+    }
 }
 
 
@@ -182,6 +200,7 @@ main(int argc, char *argv[])
     char input[MAX_FILENAME_SIZE];
     int c;
     int iterations = 1;
+    int generate = 0;
     struct Grid *grid;
     struct Grid *tmp_grid;
 
@@ -190,7 +209,7 @@ main(int argc, char *argv[])
         return 0;
     }
 
-    while ((c = getopt(argc, argv, "?hv:n:i:")) != -1) {
+    while ((c = getopt(argc, argv, "?hv:n:i:g")) != -1) {
         switch (c) {
             case 'h':
             case 'v':
@@ -201,6 +220,9 @@ main(int argc, char *argv[])
                 break;
             case 'i':
                 strncpy(input, optarg, MAX_FILENAME_SIZE);
+                break;
+            case 'g':
+                generate = 1;
                 break;
             default:
                 help();
@@ -215,11 +237,15 @@ main(int argc, char *argv[])
 
     grid = allocate_grid();
     tmp_grid = allocate_grid();
-    if (grid == NULL) {
+    if (!grid || !tmp_grid) {
         printf("error: out of memory\n");
         return -1;
     }
-    read_grid(input, grid); 
+    if (generate) {
+        generate_grid(grid);
+    } else {
+        read_grid(input, grid); 
+    }
     for (c = 0; c < iterations; c++) {
         mean_filter(grid, tmp_grid);
         struct Grid *tmp = grid;
