@@ -181,9 +181,14 @@ main(int argc, char *argv[])
 {
     char input[MAX_FILENAME_SIZE];
     int c;
-    int iterations;
+    int iterations = 1;
     struct Grid *grid;
     struct Grid *tmp_grid;
+
+    if (argc < 2) {
+        help();
+        return 0;
+    }
 
     while ((c = getopt(argc, argv, "?hv:n:i:")) != -1) {
         switch (c) {
@@ -202,6 +207,11 @@ main(int argc, char *argv[])
                 return 0;
         }
     } 
+
+    if (argc != optind) {
+        help();
+        return 0;
+    }
 
     grid = allocate_grid();
     tmp_grid = allocate_grid();
