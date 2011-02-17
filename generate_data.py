@@ -15,7 +15,6 @@ def main(argv=None):
     if len(args) != 2:
         print "usage: generate_data.py <number of random numbers>"
     else:
-        print(args[1])
         generate(args[1])
 
 if __name__ == "__main__":
