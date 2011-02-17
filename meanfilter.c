@@ -33,7 +33,7 @@ round(double d)
 void
 help()
 {
-    printf("usage: meanfilter [-n <iterations> -g|-i <input file>\]n");
+    printf("usage: meanfilter [-n <iterations> -g|-i <input file>]\n");
     printf("input file format: single number of array, each on newline\n");
 }
 
