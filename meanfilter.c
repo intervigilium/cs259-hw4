@@ -192,7 +192,7 @@ main(int argc, char *argv[])
                 help();
                 return 0;
             case 'n':
-                iterations = getopt;
+                iterations = atoi((char *) getopt);
                 break;
             case 'i':
                 strncpy(input, optarg, MAX_FILENAME_SIZE);
