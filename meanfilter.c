@@ -87,7 +87,7 @@ read_grid(char *input, struct Grid *grid)
         return -1;
     }
 
-    for (i = 0; i < grid->x i++) {
+    for (i = 0; i < grid->x; i++) {
         for (j = 0; j < grid->y; j++) {
             for (k = 0; k < grid->z; k++) {
                 int n;
