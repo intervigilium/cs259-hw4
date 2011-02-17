@@ -187,14 +187,14 @@ main(int argc, char *argv[])
 
     while ((c = getopt(argc, argv, "?hv:n:i:")) != -1) {
         switch (c) {
-            case h:
-            case v:
+            case 'h':
+            case 'v':
                 help();
                 return 0;
-            case n:
+            case 'n':
                 iterations = getopt;
                 break;
-            case i:
+            case 'i':
                 strncpy(input, optarg, MAX_FILENAME_SIZE);
                 break;
             default:
