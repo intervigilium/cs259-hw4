@@ -260,6 +260,7 @@ main(int argc, char *argv[])
         grid = tmp_grid;
         tmp_grid = tmp;
     }
+    write_grid(grid);
     cleanup_grid(grid);
     cleanup_grid(tmp_grid);
 
