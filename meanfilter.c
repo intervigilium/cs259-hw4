@@ -21,14 +21,14 @@ struct Grid
 };
 
 
-static inline double
+inline double
 round(double d)
 {
     return floor(d + 0.5);
 }
 
 
-static void
+void
 help()
 {
     printf("usage: meanfilter -n <iterations> -i <input file>\n");
@@ -75,7 +75,7 @@ cleanup_grid(struct Grid *grid)
 }
 
 
-static int
+int
 read_grid(char *input, struct Grid *grid)
 {
     int i, j, k;
@@ -101,7 +101,7 @@ read_grid(char *input, struct Grid *grid)
 }
 
 
-static void
+void
 write_grid(struct Grid *grid)
 {
     int i, j, k;
