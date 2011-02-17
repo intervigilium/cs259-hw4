@@ -50,12 +50,12 @@ allocate_grid()
     g->x = DEFAULT_SIZE;
     g->y = DEFAULT_SIZE;
     g->z = DEFAULT_SIZE;
-    g->grid = (int ***) malloc(sizeof(int) * DEFAULT_SIZE);
+    g->grid = (int ***) malloc(sizeof(int **) * DEFAULT_SIZE);
     if (!g->grid) {
         return NULL;
     }
     for (i = 0; i < DEFAULT_SIZE; i++) {
-        g->grid[i] = (int **) malloc(sizeof(int) * DEFAULT_SIZE);
+        g->grid[i] = (int **) malloc(sizeof(int *) * DEFAULT_SIZE);
         if (!g->grid[i]) {
             return NULL;
         }
